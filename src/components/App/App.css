@@ -1,0 +1,13 @@
+.page {
+  background-color: #fff;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page__content {
+  max-width: 1360px;
+  max-height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px;
+}
