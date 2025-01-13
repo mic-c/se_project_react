@@ -20,7 +20,7 @@ function App() {
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
-    setSelectedCard("card");
+    setSelectedCard(card);
   };
 
   const handleAddClick = () => {
@@ -28,7 +28,7 @@ function App() {
   };
 
   const closeActiveModal = () => {
-    setActiveModal("add-garment");
+    setActiveModal({});
   };
 
   useEffect(() => {
