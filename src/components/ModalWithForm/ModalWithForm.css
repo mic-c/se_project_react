@@ -1,7 +1,14 @@
 .modal {
   visibility: hidden;
-  position: fixed;
+  display: flex;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  right: 0;
+  justify-content: center;
   max-width: 496px;
   height: fit-content;
   z-index: 1010;
@@ -12,7 +19,7 @@
 }
 
 .modal__close {
-  position: absolute;
+  position: relative;
   top: 20px;
   right: 28px;
   border: none;
@@ -26,6 +33,7 @@
   position: relative;
   padding: 28px 28px 36px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .modal__form {
