@@ -53,7 +53,6 @@ function App() {
       </div>
       {activeModal && (
         <>
-          <div className="modal-overlay" onClick={closeActiveModal}></div>
           {activeModal === "add-garment" && (
             <ModalWithForm
               title="New garment"
