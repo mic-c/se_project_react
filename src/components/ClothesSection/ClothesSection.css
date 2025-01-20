@@ -1,0 +1,15 @@
+.clothes__header {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  padding-bottom: 16px;
+}
+
+.clothes__button-text {
+  padding: 0;
+  margin: 0;
+  color: #00000099;
+  font: 20px;
+  line-height: 24.8px;
+  font-weight: 700;
+}
