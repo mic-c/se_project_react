@@ -2,6 +2,7 @@
   visibility: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,12 +17,14 @@
 }
 
 .modal__close {
-  position: relative;
-  top: -70px;
-  left: 260px;
+  position: absolute;
+  top: 20px;
+  right: 28px;
   border: none;
   width: 16px;
   height: 16px;
+  z-index: 10000;
+  background-color: transparent;
 }
 
 .modal__content {

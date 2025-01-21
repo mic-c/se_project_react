@@ -8,7 +8,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getWeather, filterWeatherData } from "../../utils/weather api";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { defaultClothingItems } from "../../utils/constants";
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
               </label>
               <fieldset className="modal__radio-buttons">
                 <legend className="modal__legend">
-                  Select the weather type
+                  Select the weather type:
                 </legend>
                 <label
                   htmlFor="hot"
