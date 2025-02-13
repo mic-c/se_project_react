@@ -47,7 +47,7 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddItemModalSubmit = ({ name, image, weather }) => {
+  const handleAddItemModalSubmit = ({ name, image, weather }, resetForm) => {
     const newItem = {
       name,
       imageUrl: image,
@@ -82,6 +82,14 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
