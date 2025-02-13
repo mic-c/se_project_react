@@ -36,3 +36,20 @@
   align-items: center;
   gap: 12px;
 }
+
+.header__link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header__container-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

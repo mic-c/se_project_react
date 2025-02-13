@@ -11,16 +11,16 @@ export default function AddItemModal({
   const [image, setImage] = useState("");
   const [weather, setWeather] = useState("");
 
-  const handleNamechange = (evt) => {
-    setName(e.target.value);
+  const handleNameChange = (evt) => {
+    setName(evt.target.value);
   };
 
-  const handleimagechange = (evt) => {
-    setImage(e.target.value);
+  const handleImageChange = (evt) => {
+    setImage(evt.target.value);
   };
 
   const handleWeatherChange = (evt) => {
-    setWeather(e.target.value);
+    setWeather(evt.target.value);
   };
 
   const handleSubmit = (evt) => {
@@ -51,6 +51,18 @@ export default function AddItemModal({
           required
           minLength="1"
           maxLength="30"
+        />
+      </label>
+      <label htmlFor="imageUrl" className="modal__label">
+        Image
+        <input
+          type="url"
+          className="modal__input"
+          id="imageUrl"
+          placeholder="Image URL"
+          required
+          onChange={handleImageChange}
+          value={image}
         />
       </label>
       <fieldset className="modal__radio-buttons">

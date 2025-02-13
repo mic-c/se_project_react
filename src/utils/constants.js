@@ -61,6 +61,12 @@ export const weatherOptions = [
   },
 ];
 
+export const defaultWeatherOption = {
+  day: true,
+  condition: "clear",
+  url: new URL("../assets/day/clear.png", import.meta.url).href,
+};
+
 export const defaultClothingItems = [
   {
     _id: 0,
