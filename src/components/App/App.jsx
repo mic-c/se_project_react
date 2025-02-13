@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { defaultClothingItems } from "../../utils/constants";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureContext";
 
 import { getItems } from "../../utils/api";
 import { postItem } from "../../utils/api";
