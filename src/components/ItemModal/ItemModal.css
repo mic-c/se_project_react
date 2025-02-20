@@ -60,6 +60,16 @@
   box-sizing: border-box;
 }
 
+.modal__delete-item-btn {
+  position: absolute;
+  right: 30px;
+  bottom: 60px;
+  border: none;
+  background: transparent;
+  color: #ff4d00;
+  font-size: 20px;
+}
+
 @media screen and (max-width: 480px) {
   .modal {
     width: 343px;

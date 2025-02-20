@@ -1,6 +1,6 @@
-function DeleteModal({ onClose, isOpen, onDeleteCard }) {
+export default function DeleteModal({ onClose, isOpen, onDeleteCard }) {
   return (
-    <div className={`modal ${isOpen}`}>
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content-delete">
         <button
           onClick={onClose}

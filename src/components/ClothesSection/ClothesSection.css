@@ -1,15 +1,47 @@
-.clothes__header {
+.clothes__section {
   display: flex;
   gap: 20px;
   align-items: end;
   padding-bottom: 16px;
 }
 
-.clothes__button-text {
+.paragraphButton-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin: 8px 0 16px 0;
+}
+
+.clothing__add-btn {
+  max-width: 110px;
   padding: 0;
-  margin: 0;
-  color: #00000099;
-  font: 20px;
-  line-height: 24.8px;
+  height: 25px;
+  border: none;
+  background: none;
+  opacity: 0.6;
+  cursor: pointer;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-weight: 700;
+  line-height: 24px;
+  font-size: 20px;
+}
+
+.clothing__section-items {
+  margin: 0;
+}
+
+.clothes__add-btn:hover {
+  opacity: 1;
+}
+
+.clothes-section__items {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 20px;
+  max-width: 1015px;
 }
