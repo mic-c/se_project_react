@@ -37,14 +37,6 @@ export default function AddItemModal({
     setWeather("");
   };
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setName("");
-  //     setImage("");
-  //     setWeather("");
-  //   }
-  // }, [isOpen]);
-
   return (
     <ModalWithForm
       title="New garment"

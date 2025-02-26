@@ -102,30 +102,31 @@ function App() {
         <div className="page">
           <div className="page__content">
             <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+
+            <Routes>
+              <Route
+                path=""
+                element={
+                  <Main
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                  />
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <Profile
+                    clothingItems={clothingItems}
+                    onCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
+                  />
+                }
+              />
+            </Routes>
+            <Footer />
           </div>
-          <Routes>
-            <Route
-              path=""
-              element={
-                <Main
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                />
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  clothingItems={clothingItems}
-                  onCardClick={handleCardClick}
-                  handleAddClick={handleAddClick}
-                />
-              }
-            />
-          </Routes>
-          <Footer />
         </div>
         {activeModal && (
           <>

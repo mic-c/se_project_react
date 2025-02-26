@@ -1,29 +1,24 @@
 .header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 0 28px;
+  padding: 32px 0 0;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  justify-content: space-between;
 }
 
 .header__add-clothes-button {
-  margin: 0 20px 0 auto;
+  margin: 0 20px 0 20px;
   background: none;
 }
 
 .header__date-And-Location {
   margin: 0;
+  font-family: "CabinetGrotesk", sans-serif;
 }
 
 .header__logo {
   margin-right: 24px;
-}
-
-.header__user-container {
-  display: flex;
-  margin: 0 20px 0 auto;
 }
 
 .header__user-name {
@@ -52,4 +47,5 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 }
