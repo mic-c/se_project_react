@@ -128,27 +128,19 @@ function App() {
             <Footer />
           </div>
         </div>
-        {activeModal && (
-          <>
-            {activeModal === "add-garment" && (
-              <AddItemModal
-                isOpen={activeModal === "add-garment"}
-                onClose={closeActiveModal}
-                onAddItemModalSubmit={handleAddItemModalSubmit}
-              />
-            )}
-            {activeModal === "preview" && (
-              <ItemModal
-                isOpen={activeModal === "preview"}
-                card={selectedCard}
-                onClose={closeActiveModal}
-                selectedCard={selectedCard}
-                onSelectCard={setSelectedCard}
-                onDeleteClick={handleDeleteCard}
-              />
-            )}
-          </>
-        )}
+        <AddItemModal
+          isOpen={activeModal === "add-garment"}
+          onClose={closeActiveModal}
+          onAddItemModalSubmit={handleAddItemModalSubmit}
+        />
+        <ItemModal
+          isOpen={activeModal === "preview"}
+          card={selectedCard}
+          onClose={closeActiveModal}
+          selectedCard={selectedCard}
+          onSelectCard={setSelectedCard}
+          onDeleteClick={handleDeleteCard}
+        />
       </>
     </CurrentTemperatureUnitContext.Provider>
   );
