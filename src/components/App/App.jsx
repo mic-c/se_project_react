@@ -47,20 +47,17 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddItemModalSubmit = ({ name, image, weather }, resetForm) => {
+  const handleAddItemModalSubmit = ({ name, image, weather }) => {
     const newItem = {
       name,
       imageUrl: image,
       weather,
     };
 
-    postItem(newItem)
-      .then((dbItem) => {
-        setClothingItems((prevItems) => [dbItem, ...prevItems]);
-        closeActiveModal();
-        resetForm();
-      })
-      .catch(console.error);
+    return postItem(newItem).then((dbItem) => {
+      setClothingItems((prevItems) => [dbItem, ...prevItems]);
+      closeActiveModal();
+    });
   };
 
   const handleDeleteCard = () => {

@@ -19,7 +19,7 @@ function ModalWithForm({
       <div className="modal__content modal__content_form">
         <h2 className="modal__title">{title}</h2>
         <button onClick={onClose} type="button" className="modal__close">
-          x
+          X
         </button>
         <form onSubmit={onSubmit} className="modal__form">
           {children}

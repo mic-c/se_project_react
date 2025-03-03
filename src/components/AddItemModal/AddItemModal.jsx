@@ -23,18 +23,15 @@ export default function AddItemModal({
     setWeather(evt.target.value);
   };
 
-  const resetForm = () => {
-    setName("");
-    setImage("");
-    setWeather("");
-  };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onAddItemModalSubmit({ name, image, weather }, resetForm);
-    setName("");
-    setImage("");
-    setWeather("");
+    onAddItemModalSubmit({ name, image, weather })
+      .then(() => {
+        setName("");
+        setImage("");
+        setWeather("");
+      })
+      .catch(console.error);
   };
 
   return (
@@ -83,7 +80,7 @@ export default function AddItemModal({
             onChange={handleWeatherChange}
             checked={weather === "hot"}
           />
-          Hot
+          <span className="modal__radio-input-text">Hot</span>
         </label>
         <label htmlFor="warm" className="modal__label modal__label_type_radio">
           <input
@@ -95,7 +92,7 @@ export default function AddItemModal({
             onChange={handleWeatherChange}
             checked={weather === "warm"}
           />
-          Warm
+          <span className="modal__radio-input-text">Warm</span>
         </label>
         <label htmlFor="cold" className="modal__label modal__label_type_radio">
           <input
@@ -107,7 +104,7 @@ export default function AddItemModal({
             onChange={handleWeatherChange}
             checked={weather === "cold"}
           />
-          Cold
+          <span className="modal__radio-input-text">Cold</span>
         </label>
       </fieldset>
     </ModalWithForm>
