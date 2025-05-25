@@ -6,3 +6,17 @@
 .profile__clothing-items {
   margin: 0;
 }
+
+.profile__signout-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.profile__signout-button:hover {
+  background-color: #ff1a1a;
+}

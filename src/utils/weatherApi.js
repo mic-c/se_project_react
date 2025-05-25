@@ -1,21 +1,34 @@
 import { checkResponse } from "./api";
 
-export const getWeather = ({ latitude, longitude }, APIkey) => {
-  return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
-  ).then(checkResponse);
+const API_KEY = "f1f7375e5abc9374fc5d0879d1b7a575";
+const BASE_URL = "https://api.weatherapi.com/v1";
+
+export const getWeather = ({ latitude, longitude }, APIkey = API_KEY) => {
+  const url = `${BASE_URL}/current.json?key=${APIkey}&q=${latitude},${longitude}`;
+  return fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status}`);
+      }
+      return res.json();
+    })
+    .catch((err) => {
+      console.error("Error fetching weather data:", err);
+      throw err;
+    });
 };
 
 export const filterWeatherData = (data) => {
-  const result = {};
-  result.city = data.name;
-  result.temp = {
-    F: Math.round(data.main.temp),
-    C: Math.round((data.main.temp - 32) / 1.8),
+  const result = {
+    city: data.location.name,
+    temp: {
+      F: Math.round(data.current.temp_f),
+      C: Math.round(data.current.temp_c),
+    },
+    condition: data.current.condition.text.toLowerCase(),
+    icon: data.current.condition.icon,
+    isDay: data.current.is_day === 1,
   };
-  result.type = getWeatherType(result.temp.F);
-  result.condition = data.weather[0].main.toLowerCase();
-  result.isDay = isDay(data.sys, Date.now());
   return result;
 };
 

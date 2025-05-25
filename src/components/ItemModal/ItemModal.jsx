@@ -1,30 +1,36 @@
 import "./ItemModal.css";
+import React, { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ItemModal({ isOpen, onClose, card, onDeleteClick }) {
-  if (!isOpen) return null;
+  const currentUser = useContext(CurrentUserContext);
+
+  if (!isOpen || !card) return null;
+
+  const isOwn = card?.owner === currentUser?._id;
+  const itemDeleteButtonClassName = `modal__delete-button ${
+    isOwn ? "" : "modal__delete-button_hidden"
+  }`;
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal__content modal__content_type_image">
-        <button onClick={onClose} className="modal__close" type="button">
-          x
+    <div className="modal">
+      <div className="modal__content">
+        <button
+          className="modal__close"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          &times;
         </button>
-        <img
-          src={card.imageUrl}
-          alt="clothing image"
-          className="modal__image"
-        />
-        <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
-          <button
-            type="button"
-            onClick={onDeleteClick}
-            className="modal__delete-item-btn"
-          >
-            Delete Item
-          </button>
-        </div>
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
+        <h2 className="modal__title">{card.name}</h2>
+        <button
+          className={itemDeleteButtonClassName}
+          onClick={onDeleteClick}
+          aria-label="Delete item"
+        >
+          Delete Item
+        </button>
       </div>
     </div>
   );
