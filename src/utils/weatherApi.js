@@ -4,7 +4,7 @@ const API_KEY = "f1f7375e5abc9374fc5d0879d1b7a575";
 const BASE_URL = "https://api.weatherapi.com/v1";
 
 export const getWeather = ({ latitude, longitude }, APIkey = API_KEY) => {
-  const url = `${BASE_URL}/current.json?key=${APIkey}&q=${latitude},${longitude}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`;
   return fetch(url)
     .then((res) => {
       if (!res.ok) {
