@@ -100,6 +100,9 @@ function App() {
     const coordinates = { latitude: 37.7749, longitude: -122.4194 }; // Example coordinates
     getWeather(coordinates)
       .then((data) => {
+        if (!data.location) {
+          throw new Error(data.error?.message || "Invalid weather data");
+        }
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })

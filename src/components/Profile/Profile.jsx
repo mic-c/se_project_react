@@ -1,3 +1,4 @@
+import React from "react";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
@@ -11,13 +12,11 @@ function Profile({
 }) {
   return (
     <div className="profile">
+      <SideBar handleEditClick={handleEditClick} handleSignOut={handleSignOut} />
       <button onClick={handleAddClick} className="profile__add-button">
         Add Item
       </button>
-      <button onClick={handleSignOut} className="profile__signout-button">
-        Sign Out
-      </button>
-      {/* Render clothing items or other profile content */}
+      <ClothesSection clothingItems={clothingItems} onCardClick={onCardClick} />
     </div>
   );
 }
