@@ -6,35 +6,26 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import React, { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Header({ handleAddClick, weatherData, isLoggedIn }) {
-  const currentUser = useContext(CurrentUserContext);
-
+function Header({
+  handleAddClick,
+  weatherData,
+  isLoggedIn,
+  checked,
+  onToggle,
+}) {
   return (
     <header className="header">
-      <div className="header__logo">WTWR</div>
-      {isLoggedIn ? (
-        <div className="header__user-info">
-          {currentUser.avatar ? (
-            <img
-              src={currentUser.avatar}
-              alt="User Avatar"
-              className="header__avatar"
-            />
-          ) : (
-            <div className="header__avatar-placeholder">
-              {currentUser.name[0].toUpperCase()}
-            </div>
-          )}
-          <span className="header__username">{currentUser.name}</span>
-        </div>
-      ) : (
-        <button
-          className="header__login-button"
-          onClick={() => handleAddClick("login")}
-        >
-          Log In
-        </button>
-      )}
+      <nav className="header__nav">
+        <Link to="/" className="header__link">
+          Home
+        </Link>
+        <Link to="/profile" className="header__link">
+          Profile
+        </Link>
+      </nav>
+      <div className="header__controls">
+        <ToggleSwitch checked={checked} onChange={onToggle} />
+      </div>
     </header>
   );
 }
