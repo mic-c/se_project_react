@@ -97,10 +97,10 @@ function App() {
 
   // Fetch weather data
   useEffect(() => {
-    const coordinates = { latitude: 37.7749, longitude: -122.4194 }; // Example coordinates
+    const coordinates = { latitude: 32.7767, longitude: -96.797 };
     getWeather(coordinates)
       .then((data) => {
-        if (!data.location) {
+        if (!data.name) {
           throw new Error(data.error?.message || "Invalid weather data");
         }
         const filteredData = filterWeatherData(data);

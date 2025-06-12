@@ -19,16 +19,30 @@ export const getWeather = ({ latitude, longitude }, APIkey = API_KEY) => {
 };
 
 export const filterWeatherData = (data) => {
+  // const result = {
+  //   city: data.name,
+  //   temp: {
+  //     F: Math.round(data.current.temp_f),
+  //     C: Math.round(data.current.temp_c),
+  //   },
+  //   condition: data.current.condition.text.toLowerCase(),
+  //   icon: data.current.condition.icon,
+  //   isDay: data.current.is_day === 1,
+  // };
+  //
   const result = {
-    city: data.location.name,
+    city: data.name,
     temp: {
-      F: Math.round(data.current.temp_f),
-      C: Math.round(data.current.temp_c),
+      F: Math.round(data.main.temp),
+      C: Math.round((data.main.temp - 32) * (5 / 9)), // Convert F to C
     },
-    condition: data.current.condition.text.toLowerCase(),
-    icon: data.current.condition.icon,
-    isDay: data.current.is_day === 1,
+    type: getWeatherType(data.main.temp),
+    isDay: isDay(data.sys, Date.now() / 1000), // Convert to seconds
+    condition: data.weather[0].main.toLowerCase(),
   };
+
+  console.log(result);
+
   return result;
 };
 

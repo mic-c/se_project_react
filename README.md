@@ -48,6 +48,12 @@ The app fetches real-time weather data from [WeatherAPI](https://www.weatherapi.
 - **contexts/**: Contains `CurrentTemperatureUnitContext.js` and `CurrentUserContext.js`
 - **.prettierignore**: Tells Prettier to ignore `normalize.css`
 
+## Backend Repository
+
+To run the full application, you also need the backend server.  
+You can find the backend code here:  
+[se_project_express (Backend Repository)](https://github.com/mic-c/se_project_express.git)
+
 ## Notes
 
 - All JS and CSS files are stored in the `src` folder, grouped by component.
