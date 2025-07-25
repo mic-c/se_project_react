@@ -13,6 +13,9 @@ function Header({
   checked,
   onToggle,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwner = currentUser && currentUser.isOwner;
+
   return (
     <header className="header">
       <nav className="header__nav">

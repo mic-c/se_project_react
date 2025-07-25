@@ -1,45 +1,59 @@
 import React, { useState } from "react";
-import "./RegisterModal.css";
 
 function RegisterModal({ isOpen, onClose, onRegister }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    avatar: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister({ email, password });
+    onRegister(form);
   };
 
+  if (!isOpen) return null;
   return (
-    isOpen && (
-      <div className="modal">
-        <div className="modal__content">
-          <button className="modal__close" onClick={onClose}>
-            &times;
-          </button>
-          <h2 className="modal__title">Sign Up</h2>
-          <form className="modal__form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button type="submit" className="modal__submit">
-              Register
-            </button>
-          </form>
-        </div>
-      </div>
-    )
+    <form onSubmit={handleSubmit}>
+      <input
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+        placeholder="Name"
+        required
+      />
+      <input
+        name="avatar"
+        value={form.avatar}
+        onChange={handleChange}
+        placeholder="Avatar URL"
+        required
+      />
+      <input
+        name="email"
+        type="email"
+        value={form.email}
+        onChange={handleChange}
+        placeholder="Email"
+        required
+      />
+      <input
+        name="password"
+        type="password"
+        value={form.password}
+        onChange={handleChange}
+        placeholder="Password"
+        required
+      />
+      <button type="submit">Register</button>
+      <button type="button" onClick={onClose}>
+        Cancel
+      </button>
+    </form>
   );
 }
 

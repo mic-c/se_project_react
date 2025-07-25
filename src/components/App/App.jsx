@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
@@ -12,15 +13,16 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { signup, login, editProfile } from "../../utils/auth";
+import { signup, login } from "../../utils/auth";
 import { getItems, postItem, deleteItem } from "../../utils/api";
 
 function App() {
+  const [weatherError, setWeatherError] = useState(null);
+  const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [weatherData, setWeatherData] = useState(null);
-  const [clothingItems, setClothingItems] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   // Close the active modal
@@ -100,13 +102,16 @@ function App() {
     const coordinates = { latitude: 32.7767, longitude: -96.797 };
     getWeather(coordinates)
       .then((data) => {
+        console.log("Weather data:", data);
         if (!data.name) {
           throw new Error(data.error?.message || "Invalid weather data");
         }
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+        setWeatherError(null);
       })
       .catch((err) => {
+        setWeatherError("Could not fetch weather. Please check your API key.");
         console.error("Error fetching weather data:", err);
       });
   }, []);
@@ -114,14 +119,15 @@ function App() {
   // Fetch clothing items
   useEffect(() => {
     getItems()
-      .then((items) => {
-        setClothingItems(items);
-      })
+      .then((items) => setClothingItems(items))
       .catch((err) => {
         console.error("Error fetching clothing items:", err);
       });
   }, []);
 
+  if (weatherError) {
+    return <div>{weatherError}</div>;
+  }
   if (!weatherData) {
     return <div>Loading weather data...</div>;
   }
@@ -151,12 +157,14 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  clothingItems={clothingItems}
-                  onCardClick={setSelectedCard}
-                  handleAddClick={() => setActiveModal("add-garment")}
-                  handleSignOut={handleSignOut}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    clothingItems={clothingItems}
+                    onCardClick={setSelectedCard}
+                    handleAddClick={() => setActiveModal("add-garment")}
+                    handleSignOut={handleSignOut}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
