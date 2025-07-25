@@ -6,14 +6,7 @@ import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureContext";
 
 function Main({ weatherData, handleCardClick, clothingItems }) {
-  const currentTemperatureUnit = useContext(CurrentTemperatureUnitContext);
-
-  if (!weatherData) {
-    return <div>Loading weather data...</div>;
-  }
-  if (!clothingItems) {
-    return <div>Loading clothing items...</div>;
-  }
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
     <main className="main">
@@ -24,17 +17,19 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
           {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {clothingItems.length === 0 ? (
-            <li>No clothing items found.</li>
-          ) : (
-            clothingItems.map((item) => (
-              <ItemCard
-                key={item._id || item.id}
-                item={item}
-                onCardClick={handleCardClick}
-              />
-            ))
-          )}
+          {clothingItems
+            .filter((item) => {
+              return item.weather === weatherData.type;
+            })
+            .map((item) => {
+              return (
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  onCardClick={handleCardClick}
+                />
+              );
+            })}
         </ul>
       </section>
     </main>

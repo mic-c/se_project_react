@@ -1,19 +1,21 @@
-import React from "react";
+import { useContext } from "react";
 import "./ToggleSwitch.css";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureContext";
 
-function ToggleSwitch({ checked, onChange }) {
+export default function ToggleSwitch() {
+  const { handleToggleSwitchChange } = useContext(
+    CurrentTemperatureUnitContext
+  );
   return (
     <label className="toggle-switch">
       <input
+        onChange={handleToggleSwitchChange}
         type="checkbox"
-        checked={checked}
-        onChange={onChange}
-        role="switch"
-        aria-checked={checked}
+        className="toggle-switch_checkbox"
       />
-      <span className="slider"></span>
+      <span className="toggle-switch__circle"></span>
+      <span className="toggle-switch__text toggle-switch__text_F">F</span>
+      <span className="toggle-switch__text toggle-switch__text_C">C</span>
     </label>
   );
 }
-
-export default ToggleSwitch;

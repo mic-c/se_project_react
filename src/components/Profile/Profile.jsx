@@ -1,22 +1,20 @@
-import React from "react";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 
-function Profile({
-  clothingItems,
-  onCardClick,
-  handleAddClick,
-  handleEditClick,
-  handleSignOut,
-}) {
+function Profile({ clothingItems, onCardClick, handleAddClick }) {
   return (
     <div className="profile">
-      <SideBar handleEditClick={handleEditClick} handleSignOut={handleSignOut} />
-      <button onClick={handleAddClick} className="profile__add-button">
-        Add Item
-      </button>
-      <ClothesSection clothingItems={clothingItems} onCardClick={onCardClick} />
+      <section className="profile__sidebar">
+        <SideBar />
+      </section>
+      <section className="profile__clothing-items">
+        <ClothesSection
+          clothingItems={clothingItems}
+          onCardClick={onCardClick}
+          handleAddClick={handleAddClick}
+        />
+      </section>
     </div>
   );
 }

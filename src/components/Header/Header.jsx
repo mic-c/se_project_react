@@ -3,31 +3,42 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import React, { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Header({
-  handleAddClick,
-  weatherData,
-  isLoggedIn,
-  checked,
-  onToggle,
-}) {
-  const currentUser = useContext(CurrentUserContext);
-  const isOwner = currentUser && currentUser.isOwner;
+function Header({ handleAddClick, weatherData }) {
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <header className="header">
-      <nav className="header__nav">
-        <Link to="/" className="header__link">
-          Home
+      <div className="header__container-left">
+        <Link to="/">
+          <img className="header__logo" src={logo} alt="WTWR logo" />
         </Link>
+        <p className="header__date-And-Location">
+          {currentDate}, {weatherData.city}
+        </p>
+      </div>
+      <div className="header__right">
+        <ToggleSwitch />
+        <button
+          onClick={handleAddClick}
+          type="button"
+          className="header__add-clothes-button"
+        >
+          + Add Clothes
+        </button>
         <Link to="/profile" className="header__link">
-          Profile
+          <div className="header__user-info">
+            <p className="header__user-name">Chukwuka Arimah</p>
+            <img
+              src={avatar}
+              alt="Chukwuka Arimah"
+              className="header__user-avatar"
+            />
+          </div>
         </Link>
-      </nav>
-      <div className="header__controls">
-        <ToggleSwitch checked={checked} onChange={onToggle} />
       </div>
     </header>
   );
