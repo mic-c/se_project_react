@@ -32,6 +32,19 @@
   gap: 12px;
 }
 
+.header__user-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
 .header__link {
   text-decoration: none;
   color: #000;
