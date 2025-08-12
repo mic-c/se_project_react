@@ -46,6 +46,11 @@ function App() {
   const handleEditProfileClick = () => setIsEditProfileOpen(true);
   const closeEditProfileModal = () => setIsEditProfileOpen(false);
 
+  // Use this everywhere to close modals
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
+
   // Edit profile submit handler
   const handleEditProfile = (form) => {
     const token = localStorage.getItem("jwt");
@@ -64,7 +69,7 @@ function App() {
   const handleRegister = (form) => {
     signup(form)
       .then(() => {
-        setActiveModal(""); // Close modal
+        closeActiveModal();
         handleLogin({ email: form.email, password: form.password }); // Auto-login
       })
       .catch((err) => {
@@ -80,7 +85,7 @@ function App() {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          setActiveModal("");
+          closeActiveModal();
           checkToken(res.token).then((user) => setCurrentUser(user));
         }
       })
@@ -123,9 +128,8 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
+  const handleSignUpClick = () => setActiveModal("register");
+  const handleSignInClick = () => setActiveModal("login");
 
   const handleAddItemModalSubmit = ({ name, image, weather }) => {
     const newItem = {
@@ -200,7 +204,12 @@ function App() {
       >
         <div className="page">
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              onSignInClick={handleSignInClick}
+              onSignUpClick={handleSignUpClick}
+            />
             <Routes>
               <Route
                 path=""
@@ -247,7 +256,6 @@ function App() {
         <EditProfileModal
           isOpen={isEditProfileOpen}
           onClose={closeEditProfileModal}
-          currentUser={currentUser}
           onEditProfile={handleEditProfile}
         />
         <RegisterModal
@@ -259,6 +267,7 @@ function App() {
           isOpen={activeModal === "login"}
           onClose={closeActiveModal}
           onLogin={handleLogin}
+          onSignUpClick={handleSignUpClick}
         />
       </CurrentTemperatureUnitContext.Provider>
     </CurrentUserContext.Provider>

@@ -23,8 +23,10 @@
 
 .card__image {
   width: 100%;
-  display: block;
+  height: 200px;
   object-fit: cover;
+  border-radius: 12px;
+  display: block;
 }
 
 @media screen and (max-width: 480px) {
