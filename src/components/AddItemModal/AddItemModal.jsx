@@ -1,5 +1,5 @@
 import "./AddItemModal.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 export default function AddItemModal({
@@ -8,27 +8,19 @@ export default function AddItemModal({
   onAddItemModalSubmit,
 }) {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  const handleNameChange = (evt) => {
-    setName(evt.target.value);
-  };
-
-  const handleImageChange = (evt) => {
-    setImage(evt.target.value);
-  };
-
-  const handleWeatherChange = (evt) => {
-    setWeather(evt.target.value);
-  };
+  const handleNameChange = (evt) => setName(evt.target.value);
+  const handleImageChange = (evt) => setImageUrl(evt.target.value);
+  const handleWeatherChange = (evt) => setWeather(evt.target.value);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onAddItemModalSubmit({ name, image, weather })
+    onAddItemModalSubmit({ name, imageUrl, weather })
       .then(() => {
         setName("");
-        setImage("");
+        setImageUrl("");
         setWeather("");
       })
       .catch(console.error);
@@ -37,7 +29,6 @@ export default function AddItemModal({
   return (
     <ModalWithForm
       title="New garment"
-      buttonText="Add garment"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -65,7 +56,7 @@ export default function AddItemModal({
           placeholder="Image URL"
           required
           onChange={handleImageChange}
-          value={image}
+          value={imageUrl}
         />
       </label>
       <fieldset className="modal__radio-buttons">
@@ -107,6 +98,14 @@ export default function AddItemModal({
           <span className="modal__radio-input-text">Cold</span>
         </label>
       </fieldset>
+      <div className="modal__actions">
+        <button type="submit" className="modal__submit-button">
+          Add Garment
+        </button>
+        <span className="modal__alt-action" onClick={onClose}>
+          Cancel
+        </span>
+      </div>
     </ModalWithForm>
   );
 }

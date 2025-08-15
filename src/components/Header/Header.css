@@ -62,3 +62,10 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.header__user-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}

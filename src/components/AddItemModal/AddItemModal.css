@@ -1,0 +1,131 @@
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__input {
+  padding: 10px 14px;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f9f9f9;
+  margin-top: 4px;
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__radio-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  border: none;
+  padding: 0;
+}
+
+.modal__label_type_radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.modal__radio-input {
+  accent-color: #ff3049;
+  width: 20px;
+  height: 20px;
+}
+
+.modal__radio-input-text {
+  font-size: 15px;
+  color: #222;
+}
+
+.modal__legend {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.modal__submit-button {
+  background: #ff3049;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__submit-button:disabled {
+  background: #bdbdbd;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.modal__alt-action {
+  background: none;
+  color: #222;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 0;
+  transition: color 0.2s;
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__alt-action:hover {
+  color: #ff3049;
+}
+
+.modal__submit-button:hover {
+  background: #e0273a;
+}
+
+.modal__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.modal__alt-action {
+  background: none;
+  color: #222;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  transition: color 0.2s;
+  font-family: "CabinetGrotesk", Arial, sans-serif;
+}
+
+.modal__alt-action:hover {
+  color: #ff3049;
+}

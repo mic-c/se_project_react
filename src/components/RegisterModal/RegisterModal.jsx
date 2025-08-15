@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ isOpen, onClose, onRegister, onSignInClick }) {
+function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  onSignInClick,
+  registerError,
+}) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -78,6 +84,7 @@ function RegisterModal({ isOpen, onClose, onRegister, onSignInClick }) {
           required
         />
       </label>
+      {registerError && <p className="modal__error">{registerError}</p>}
       <div className="modal__actions">
         <button type="submit" className="modal__submit-button">
           Sign Up

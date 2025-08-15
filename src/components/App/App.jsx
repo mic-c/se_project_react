@@ -41,6 +41,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [registerError, setRegisterError] = useState("");
 
   // Edit profile modal handlers
   const handleEditProfileClick = () => setIsEditProfileOpen(true);
@@ -69,11 +70,16 @@ function App() {
   const handleRegister = (form) => {
     signup(form)
       .then(() => {
+        setRegisterError("");
         closeActiveModal();
         handleLogin({ email: form.email, password: form.password }); // Auto-login
       })
       .catch((err) => {
-        alert("Registration failed");
+        if (err.status === 409) {
+          setRegisterError("A user with this email already exists.");
+        } else {
+          setRegisterError("Registration failed. Please try again.");
+        }
         console.error(err);
       });
   };
@@ -130,6 +136,7 @@ function App() {
 
   const handleSignUpClick = () => setActiveModal("register");
   const handleSignInClick = () => setActiveModal("login");
+  const handleLogInClick = () => setActiveModal("login");
 
   const handleAddItemModalSubmit = ({ name, image, weather }) => {
     const newItem = {
@@ -160,9 +167,8 @@ function App() {
 
   // --- LIKE/DISLIKE LOGIC ---
   const handleCardLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
     if (!isLiked) {
-      addCardLike(id, token)
+      addCardLike(id)
         .then((updatedCard) => {
           setClothingItems((cards) =>
             cards.map((item) => (item._id === id ? updatedCard : item))
@@ -170,7 +176,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     } else {
-      removeCardLike(id, token)
+      removeCardLike(id)
         .then((updatedCard) => {
           setClothingItems((cards) =>
             cards.map((item) => (item._id === id ? updatedCard : item))
@@ -179,7 +185,6 @@ function App() {
         .catch((err) => console.log(err));
     }
   };
-
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -262,6 +267,8 @@ function App() {
           isOpen={activeModal === "register"}
           onClose={closeActiveModal}
           onRegister={handleRegister}
+          registerError={registerError}
+          onLogInClick={handleLogInClick}
         />
         <LoginModal
           isOpen={activeModal === "login"}

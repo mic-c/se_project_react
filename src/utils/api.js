@@ -8,7 +8,7 @@ export function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
-export function postItem({ name, image, weather }) {
+export function postItem({ name, imageUrl, weather }) {
   const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items`, {
     method: "POST",
@@ -18,7 +18,7 @@ export function postItem({ name, image, weather }) {
     },
     body: JSON.stringify({
       name,
-      imageUrl: image,
+      imageUrl,
       weather,
     }),
   }).then(checkResponse);
@@ -46,8 +46,9 @@ export function deleteItem(id) {
   }).then(checkResponse);
 }
 
-export function addCardLike(id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+export function addCardLike(cardId) {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items/${cardId}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -56,8 +57,9 @@ export function addCardLike(id, token) {
   }).then(checkResponse);
 }
 
-export function removeCardLike(id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+export function removeCardLike(cardId) {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items/${cardId}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
