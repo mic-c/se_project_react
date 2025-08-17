@@ -30,7 +30,7 @@ function RegisterModal({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText="Sign Up"
+      buttonText=""
     >
       <label htmlFor="register-email" className="modal__label">
         Email*

@@ -43,13 +43,22 @@ function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [registerError, setRegisterError] = useState("");
 
-  // Edit profile modal handlers
+  // Modal handlers
+  const handleAddClick = () => setActiveModal("add-garment");
+  const handleSignUpClick = () => setActiveModal("register");
+  const handleSignInClick = () => setActiveModal("login");
+  const handleLogInClick = () => setActiveModal("login");
+  const closeActiveModal = () => setActiveModal("");
   const handleEditProfileClick = () => setIsEditProfileOpen(true);
   const closeEditProfileModal = () => setIsEditProfileOpen(false);
 
-  // Use this everywhere to close modals
-  const closeActiveModal = () => {
-    setActiveModal("");
+  // Add item handler (fixes imageUrl bug)
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    const newItem = { name, imageUrl, weather };
+    return postItem(newItem).then((dbItem) => {
+      setClothingItems((prevItems) => [dbItem, ...prevItems]);
+      closeActiveModal();
+    });
   };
 
   // Edit profile submit handler
@@ -108,49 +117,13 @@ function App() {
     setCurrentUser(null);
   };
 
-  // Check token on mount
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((user) => {
-          setIsLoggedIn(true);
-          setCurrentUser(user);
-        })
-        .catch(() => setIsLoggedIn(false));
-    }
-  }, []);
-
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
-  };
-
+  // Card click handler
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
-  const handleAddClick = () => {
-    setActiveModal("add-garment");
-  };
-
-  const handleSignUpClick = () => setActiveModal("register");
-  const handleSignInClick = () => setActiveModal("login");
-  const handleLogInClick = () => setActiveModal("login");
-
-  const handleAddItemModalSubmit = ({ name, image, weather }) => {
-    const newItem = {
-      name,
-      imageUrl: image,
-      weather,
-    };
-
-    return postItem(newItem).then((dbItem) => {
-      setClothingItems((prevItems) => [dbItem, ...prevItems]);
-      closeActiveModal();
-    });
-  };
-
+  // Delete item handler
   const handleDeleteCard = () => {
     deleteItem(selectedCard._id)
       .then(() => {
@@ -165,7 +138,7 @@ function App() {
       });
   };
 
-  // --- LIKE/DISLIKE LOGIC ---
+  // Like/Unlike handler
   const handleCardLike = ({ id, isLiked }) => {
     if (!isLiked) {
       addCardLike(id)
@@ -185,6 +158,26 @@ function App() {
         .catch((err) => console.log(err));
     }
   };
+
+  // Temperature unit toggle
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
+  };
+
+  // Check token on mount
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((user) => {
+          setIsLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch(() => setIsLoggedIn(false));
+    }
+  }, []);
+
+  // Weather fetch
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -194,6 +187,7 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Items fetch
   useEffect(() => {
     getItems()
       .then((data) => {
@@ -234,6 +228,7 @@ function App() {
                     <Profile
                       clothingItems={clothingItems}
                       onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
                       handleAddClick={handleAddClick}
                       handleEditProfileClick={handleEditProfileClick}
                       handleSignOut={handleSignOut}
