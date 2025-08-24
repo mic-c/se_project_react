@@ -1,5 +1,5 @@
 import "./AddItemModal.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 export default function AddItemModal({
@@ -11,16 +11,24 @@ export default function AddItemModal({
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  const handleNameChange = (evt) => setName(evt.target.value);
-  const handleImageChange = (evt) => setImageUrl(evt.target.value);
-  const handleWeatherChange = (evt) => setWeather(evt.target.value);
+  const handleNameChange = (evt) => {
+    setName(evt.target.value);
+  };
+
+  const handleImageChange = (evt) => {
+    setImage(evt.target.value);
+  };
+
+  const handleWeatherChange = (evt) => {
+    setWeather(evt.target.value);
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onAddItemModalSubmit({ name, imageUrl, weather })
       .then(() => {
         setName("");
-        setImageUrl("");
+        setImage("");
         setWeather("");
       })
       .catch(console.error);
@@ -29,6 +37,7 @@ export default function AddItemModal({
   return (
     <ModalWithForm
       title="New garment"
+      buttonText="Add garment"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -98,14 +107,6 @@ export default function AddItemModal({
           <span className="modal__radio-input-text">Cold</span>
         </label>
       </fieldset>
-      <div className="modal__actions">
-        <button type="submit" className="modal__submit-button">
-          Add Garment
-        </button>
-        <span className="modal__alt-action" onClick={onClose}>
-          Cancel
-        </span>
-      </div>
     </ModalWithForm>
   );
 }

@@ -5,7 +5,7 @@ function RegisterModal({
   isOpen,
   onClose,
   onRegister,
-  onSignInClick,
+  onLogInClick,
   registerError,
 }) {
   const [form, setForm] = useState({
@@ -89,7 +89,7 @@ function RegisterModal({
         <button type="submit" className="modal__submit-button">
           Sign Up
         </button>
-        <span className="modal__alt-action" onClick={onSignInClick}>
+        <span className="modal__alt-action" onClick={onLogInClick}>
           or Log In
         </span>
       </div>

@@ -33,7 +33,7 @@ function Profile({
         <ClothesSection
           clothingItems={clothingItems}
           onCardClick={onCardClick}
-          onCardLike={onCardLike} // <-- Add this line
+          onCardLike={onCardLike}
           handleAddClick={handleAddClick}
         />
       </section>

@@ -6,9 +6,10 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Check if the item was liked by the current user
-  const isLiked = item.likes.some(
-    (id) => String(id) === String(currentUser?._id)
-  );
+  const isLiked =
+    item.likes &&
+    item.likes.some((id) => String(id) === String(currentUser._id));
+
   const isAuthorized = !!currentUser?._id;
 
   const itemLikeButtonClassName = `card__like-button${
@@ -17,7 +18,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = (e) => {
     e.stopPropagation();
-    onCardLike({ id: item._id, isLiked });
+    onCardLike({ id: item._id, isLiked, user: currentUser });
   };
 
   return (
