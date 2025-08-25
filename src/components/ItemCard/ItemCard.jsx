@@ -8,7 +8,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   // Check if the item was liked by the current user
   const isLiked =
     item.likes &&
-    item.likes.some((id) => String(id) === String(currentUser._id));
+    item.likes.some((id) => String(id) === String(currentUser?._id));
 
   const isAuthorized = !!currentUser?._id;
 

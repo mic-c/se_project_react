@@ -16,7 +16,7 @@ export default function AddItemModal({
   };
 
   const handleImageChange = (evt) => {
-    setImage(evt.target.value);
+    setImageUrl(evt.target.value);
   };
 
   const handleWeatherChange = (evt) => {
@@ -28,7 +28,7 @@ export default function AddItemModal({
     onAddItemModalSubmit({ name, imageUrl, weather })
       .then(() => {
         setName("");
-        setImage("");
+        setImageUrl("");
         setWeather("");
       })
       .catch(console.error);
