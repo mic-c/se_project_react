@@ -1,6 +1,9 @@
 import { checkResponse } from "./api";
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.your-domain-here.com"
+    : "http://localhost:3001";
 
 export function signup({ name, avatar, email, password }) {
   return fetch(`${BASE_URL}/signup`, {

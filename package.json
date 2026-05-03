@@ -3,11 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://your-domain-here.com",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && scp -r ./dist/* mic-c@your-domain-here.com:/home/mic-c/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
